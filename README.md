@@ -1,2 +1,2 @@
 # tetris
-Tetris
+Version of NES-inspired tetris made in Python.
