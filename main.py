@@ -40,6 +40,11 @@ hard_drop_completed = False
 
 pause_value = 1
 
+# the only score I am calculating is
+score = 0
+level = 1
+total_cleared_lines = 0
+
 while True:
     hard_drop_completed = False
     display.fill('BLACK')
@@ -80,7 +85,7 @@ while True:
                         last_time = current_time
 
                         if move_to_next_piece:
-                            placed_blocks = util.check_cleared_row(placed_blocks)
+                            placed_blocks, level, score, total_cleared_lines = util.check_cleared_row(placed_blocks, level, score, total_cleared_lines)
                             current_piece = next_piece
                             next_piece = Piece.generate_piece()
                             held_this_round = False
@@ -102,7 +107,7 @@ while True:
             last_time = current_time
 
             if move_to_next_piece:
-                placed_blocks = util.check_cleared_row(placed_blocks)
+                placed_blocks, level, score, total_cleared_lines = util.check_cleared_row(placed_blocks, level, score, total_cleared_lines)
                 current_piece = next_piece
                 next_piece = Piece.generate_piece()
                 held_this_round = False
@@ -120,7 +125,7 @@ while True:
         held_piece_display.new_hold(held_piece)
 
     if next_piece is not None:
-        held_piece_display.new_hold(next_piece)
+        next_piece_display.new_hold(next_piece)
 
     display.blit(grid, (GRID_PADDING / 2, GRID_PADDING / 2))
 

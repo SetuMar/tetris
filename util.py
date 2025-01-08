@@ -20,7 +20,7 @@ def get_grid(width, height, color):
 
     return grid_surface
 
-def check_cleared_row(placed_blocks):
+def check_cleared_row(placed_blocks, level, score, total_cleared_lines):
     placed_rows = {}
     for b in placed_blocks:
         placed_rows[b.rect.y] = placed_rows.get(b.rect.y, []) + [b]
@@ -38,4 +38,17 @@ def check_cleared_row(placed_blocks):
             if p.rect.y < val:
                 p.move_down()
 
-    return placed_blocks
+    total_cleared_lines += len(removed_row_values)
+
+    if total_cleared_lines % 10 == 0 and total_cleared_lines > 9: level += 1
+
+    if len(removed_row_values) == 1:
+        score += level * 40
+    elif len(removed_row_values) == 2:
+        score += level * 100
+    elif len(removed_row_values) == 3:
+        score += level * 300
+    elif len(removed_row_values) == 4:
+        score += level * 1200
+
+    return placed_blocks, level + len(removed_row_values), score, total_cleared_lines
