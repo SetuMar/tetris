@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0a2f848-476f-4dad-a675-278c47962dc9" name="Changes" comment="First Commit for Tetris. Should have done this earlier, but I know for next time. All major features completed, need to finish UI, score.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +94,7 @@
       <workItem from="1736006027156" duration="610000" />
       <workItem from="1736271800888" duration="6000" />
       <workItem from="1736357701036" duration="2178000" />
-      <workItem from="1736530861149" duration="890000" />
+      <workItem from="1736530861149" duration="1293000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit for Tetris. Should have done this earlier, but I know for next time. All major features completed, need to finish UI, score.">
       <option name="closed" value="true" />
@@ -117,7 +115,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="First Commit for Tetris. Should have done this earlier, but I know for next time. All major features completed, need to finish UI, score." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/tetris$main.coverage" NAME="main Coverage Results" MODIFIED="1736531751972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tetris$main.coverage" NAME="main Coverage Results" MODIFIED="1736532155866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/tetris$piece.coverage" NAME="piece Coverage Results" MODIFIED="1735061279420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
