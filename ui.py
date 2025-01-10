@@ -41,3 +41,15 @@ class PieceDisplay:
         pygame.draw.line(border_surf, color, pygame.Vector2(w - 1, 1), pygame.Vector2(w - 1, h - 1))
 
         return border_surf
+
+class Text:
+    def __init__(self, pos:pygame.Vector2, text, color):
+        self._color = color
+        self._font = FONT.render(text, True, color)
+        self._pos = pos
+
+    def set_text(self, new_text:str):
+        self._font = FONT.render(new_text, True, self._color)
+
+    def draw(self, surface:pygame.Surface):
+        surface.blit(self._font, self._pos)

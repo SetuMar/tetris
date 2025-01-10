@@ -8,7 +8,6 @@ import ui
 import util
 from piece import Piece
 from settings import *
-from block import Block
 
 display = pygame.display.set_mode((500, 550))
 width, height = (GRID_WIDTH - GRID_PADDING, GRID_HEIGHT - GRID_PADDING)
@@ -40,10 +39,12 @@ hard_drop_completed = False
 
 pause_value = 1
 
-# the only score I am calculating is
+# the only score I am calculating is through cleared lines
 score = 0
 level = 1
 total_cleared_lines = 0
+
+score_text = ui.Text(pygame.Vector2(300, 350), "SCORE: " + str(score), (255, 255, 255))
 
 while True:
     hard_drop_completed = False
@@ -86,6 +87,7 @@ while True:
 
                         if move_to_next_piece:
                             placed_blocks, level, score, total_cleared_lines = util.check_cleared_row(placed_blocks, level, score, total_cleared_lines)
+                            score_text.set_text("SCORE: " + str(score))
                             current_piece = next_piece
                             next_piece = Piece.generate_piece()
                             held_this_round = False
@@ -108,11 +110,13 @@ while True:
 
             if move_to_next_piece:
                 placed_blocks, level, score, total_cleared_lines = util.check_cleared_row(placed_blocks, level, score, total_cleared_lines)
+                score_text.set_text("SCORE: " + str(score))
                 current_piece = next_piece
                 next_piece = Piece.generate_piece()
                 held_this_round = False
 
     current_piece.draw(display)
+    score_text.draw(display)
 
     if len(placed_blocks) > 0:
         for block in placed_blocks:
