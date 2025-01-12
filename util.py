@@ -27,28 +27,37 @@ def check_cleared_row(placed_blocks, level, score, total_cleared_lines):
 
     removed_row_values = set()
 
+    blocks_to_remove = []
     for r, l in placed_rows.items():
         if len(l) == NUM_X_GRIDS:
             for inner in l:
-                placed_blocks.remove(inner)
+                blocks_to_remove.append(inner)
                 removed_row_values.add(r)
 
-    for val in removed_row_values:
+    for block in blocks_to_remove:
+        placed_blocks.remove(block)
+
+    print(sorted(removed_row_values))
+
+    for val in sorted(removed_row_values):
         for p in placed_blocks:
-            if p.rect.y < val:
-                p.move_down()
+            if p.rect.y <= val:
+                p.rect.y += GRID_SIZE
 
-    total_cleared_lines += len(removed_row_values)
+    # total_cleared_lines += len(removed_row_values)
 
-    if total_cleared_lines % 10 == 0 and total_cleared_lines > 9: level += 1
+    # Update level only when a multiple of 10 lines are cleared
+    # if total_cleared_lines % 10 == 0 and total_cleared_lines > 0:
+    #     level += 1
 
-    if len(removed_row_values) == 1:
-        score += level * 40
-    elif len(removed_row_values) == 2:
-        score += level * 100
-    elif len(removed_row_values) == 3:
-        score += level * 300
-    elif len(removed_row_values) == 4:
-        score += level * 1200
+    # Update score based on the number of rows cleared
+    # if len(removed_row_values) == 1:
+    #     score += level * 40
+    # elif len(removed_row_values) == 2:
+    #     score += level * 100
+    # elif len(removed_row_values) == 3:
+    #     score += level * 300
+    # elif len(removed_row_values) == 4:
+    #     score += level * 1200
 
-    return placed_blocks, level + len(removed_row_values), score, total_cleared_lines
+    return placed_blocks, level, score, total_cleared_lines

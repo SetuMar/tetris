@@ -47,10 +47,6 @@ class Piece:
         self.color = color
 
         self.block_length = len(piece_map[0])
-        
-        # rect of rotation rectangle (outer shell of piece, used only for rotation)
-        rotate_rect_width = self.block_length * GRID_SIZE
-        # create rotate rectangle
 
         self.started_moving_horizontally = False
 
@@ -66,33 +62,40 @@ class Piece:
             "bottom":0,
         }
 
-        # round number a to the nearest number b
-        def round_to_nearest(a, b):
-            return b * round(a/b)
+        self.gen_start_conditions()
+
+    def gen_start_conditions(self):
+        # rect of rotation rectangle (outer shell of piece, used only for rotation)
+        rotate_rect_width = self.block_length * GRID_SIZE
+        # create rotate rectangle
 
         # start position of each piece
             # X: HALF OF GRID WIDTH (rounded to nearest GRID_SIZE) - HALF OF PIECE WIDTH (rounded to nearest GRID_SIZE)
             # Y: TOP OF PIECE - GRID_SIZE (IF THE TOP ROW IS ALL 0s)
+        # round number a to the nearest number b
+        def round_to_nearest(a, b):
+            return b * round(a/b)
+
         start_pos = pygame.Vector2(round_to_nearest(GRID_WIDTH // 2, GRID_SIZE)
-                                   - round_to_nearest((len(piece_map[0]) * GRID_SIZE) // 2, GRID_SIZE),
-                                   (GRID_TOP - GRID_SIZE * (set(piece_map[0]) == {0})))
+                                   - round_to_nearest((len(self.piece_map[0]) * GRID_SIZE) // 2, GRID_SIZE),
+                                   (GRID_TOP - GRID_SIZE * (set(self.piece_map[0]) == {0})))
 
         self.rotate_rect = pygame.Rect(start_pos.x, start_pos.y, rotate_rect_width, rotate_rect_width)
 
         # generates rotations in order of Z presses
-        self._rotations = self.generate_rotations(piece_map)
+        self._rotations = self.generate_rotations(self.piece_map)
 
         # dictionary of all blocks
         self.blocks = {}
 
         # takes piece map and adds each letter of the map to a dictionary with an associated block piece
-        for y, row in enumerate(piece_map):
+        for y, row in enumerate(self.piece_map):
             for x, letter in enumerate(row):
                 if letter != 0:
                     self.blocks[letter] = Block(x * GRID_SIZE + start_pos.x,
-                                         y * GRID_SIZE + start_pos.y,
-                                         GRID_SIZE, GRID_SIZE,
-                                         color)
+                                                y * GRID_SIZE + start_pos.y,
+                                                GRID_SIZE, GRID_SIZE,
+                                                self.color)
 
         self.calculate_piece_edges()
 

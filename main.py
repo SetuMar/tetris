@@ -27,10 +27,10 @@ placed = False
 
 held_this_round = False
 held_piece = None
-held_piece_display = ui.PieceDisplay(300, 60, 4.2 * GRID_SIZE, 4.2 * GRID_SIZE, 'white', "HELD")
+held_piece_display = ui.PieceDisplay(pygame.Vector2(300, 60), 4.2 * GRID_SIZE, 4.2 * GRID_SIZE, 'white', "HELD")
 
 next_piece = Piece.generate_piece()
-next_piece_display = ui.PieceDisplay(300, 200, 4.2 * GRID_SIZE, 4.2 * GRID_SIZE, 'white', "NEXT")
+next_piece_display = ui.PieceDisplay(pygame.Vector2(300, 200), 4.2 * GRID_SIZE, 4.2 * GRID_SIZE, 'white', "NEXT")
 
 drop_time = TIME_BETWEEN_DROPS
 just_let_go_of_drop_key = False
@@ -70,9 +70,11 @@ while True:
                     if held_piece is None:
                         held_piece = Piece.generate_piece(current_piece.piece_type)
                         current_piece = next_piece
+                        current_piece.gen_start_conditions()
                         next_piece = Piece.generate_piece()
                     else:
                         current_piece, held_piece = held_piece, current_piece
+                        current_piece.gen_start_conditions()
 
                     current_time = time.time()
                     last_time = time.time()
@@ -126,6 +128,7 @@ while True:
 
     held_piece_display.draw(display)
     next_piece_display.draw(display)
+    display.blit(grid, (GRID_PADDING / 2, GRID_PADDING / 2))
 
     score_text.draw(display)
     level_text.draw(display)
@@ -136,7 +139,6 @@ while True:
     if next_piece is not None:
         next_piece_display.new_hold(next_piece)
 
-    display.blit(grid, (GRID_PADDING / 2, GRID_PADDING / 2))
 
     pygame.display.update()
     clock.tick(60)
